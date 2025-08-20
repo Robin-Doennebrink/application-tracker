@@ -8,9 +8,9 @@ Copyright: © 2025 Robin Dönnebrink
 
 from django.contrib import admin
 from django.urls import path
-from core.views import hello
+from core.views import ApplicationEntryListAPI
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", hello),
+    path("api/applications/", ApplicationEntryListAPI.as_view()),
 ]
