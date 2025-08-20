@@ -45,5 +45,18 @@ services:
     ports:
       - "8000:8000"
 
+  frontend:
+      build:
+        context: ./frontend
+        dockerfile: Dockerfile
+      container_name: angular_ui
+      depends_on:
+        - web
+      volumes:
+        - ./frontend:/app
+        - /app/node_modules
+      ports:
+        - "4200:4200"
+
 volumes:
   db_data:

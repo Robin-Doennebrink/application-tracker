@@ -1,0 +1,29 @@
+<h1>{{ title }}</h1>
+
+<div *ngIf="loading">Loading…</div>
+<div *ngIf="error">{{ error }}</div>
+
+<table *ngIf="!loading && !error">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Company</th>
+      <th>Job Title</th>
+      <th>Status</th>
+      <th>Max Stage</th>
+      <th>Application Date</th>
+      <th>Last Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of entries">
+      <td>{{ e.id }}</td>
+      <td>{{ e.company }}</td>
+      <td>{{ e.job_title }}</td>
+      <td>{{ e.status }}</td>
+      <td>{{ e.max_stage }}</td>
+      <td>{{ e.application_date }}</td>
+      <td>{{ e.last_update }}</td>
+    </tr>
+  </tbody>
+</table>
