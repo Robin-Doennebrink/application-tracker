@@ -379,6 +379,7 @@ pyrightconfig.json
 # Frontend stuff
 ./frontend/.gitignore
 ./frontend/.editorconfig
+./frontend/node_modules
 
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,django,python
