@@ -376,4 +376,9 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+# Frontend stuff
+./frontend/.gitignore
+./frontend/.editorconfig
+
+
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,django,python
