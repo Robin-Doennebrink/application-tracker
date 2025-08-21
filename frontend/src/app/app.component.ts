@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationsService, ApplicationEntry } from './applications.service';
+import { ApplicationsService, ApplicationEntry } from './application.service';
 
 @Component({
   selector: 'app-root',
-  standalone: false,
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -16,8 +15,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.list().subscribe({
-      next: (data) => { this.entries = data; this.loading = false; },
-      error: (err) => { this.error = 'Failed to load entries'; this.loading = false; console.error(err); }
+      next: (data: ApplicationEntry[]) => { this.entries = data; this.loading = false; },
+      error: (err: any) => { this.error = 'Failed to load entries'; this.loading = false; console.error(err); }
     });
   }
 }

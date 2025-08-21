@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment.development';
 import { Observable } from 'rxjs';
 
 export interface ApplicationEntry {
@@ -16,7 +15,7 @@ export interface ApplicationEntry {
 
 @Injectable({ providedIn: 'root' })
 export class ApplicationsService {
-  private base = environment.apiBaseUrl;
+  private base = 'http://localhost:8000'; // or env
   constructor(private http: HttpClient) {}
 
   list(): Observable<ApplicationEntry[]> {
