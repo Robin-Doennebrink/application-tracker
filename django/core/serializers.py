@@ -1,7 +1,7 @@
 """
-Description: [Add module purpose here]
+Description: The serializers of all the models.
 
-Author: Robin
+Author: Robin Dönnebrink
 Created: 20.08.2025
 Copyright: © 2025 Robin Dönnebrink
 """
