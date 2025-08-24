@@ -10,12 +10,18 @@
     <input matInput formControlName="title">
   </mat-form-field>
 
+   <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Link to Job Advertisement</mat-label>
+    <input matInput formControlName="link_to_job_advertisement">
+  </mat-form-field>
+
+
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Comment</mat-label>
     <input matInput formControlName="comment">
   </mat-form-field>
 
-  <div mat-dialog-actions align="end">
+  <div mat-dialog-actions>
     <button mat-button (click)="cancel()">Cancel</button>
     <button mat-flat-button color="primary" type="submit"  [disabled]="!form.valid">Add</button>
   </div>

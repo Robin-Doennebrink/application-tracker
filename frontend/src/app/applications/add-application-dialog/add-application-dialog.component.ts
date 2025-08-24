@@ -9,6 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 @Component({
   selector: 'app-add-application-dialog',
   templateUrl: './add-application-dialog.component.html',
+  styleUrls: ['./add-application-dialog.component.scss'],
   standalone: true,
     imports: [MatFormFieldModule,ReactiveFormsModule,MatDialogModule, MatInputModule, MatButtonModule]
 })
@@ -23,6 +24,7 @@ export class AddApplicationDialogComponent {
     this.form = this.fb.group({
       company: ['', Validators.required],
       title: ['', Validators.required],
+      link_to_job_advertisement: ['', Validators.required],
       comment: ['', Validators.required]
     });
   }
