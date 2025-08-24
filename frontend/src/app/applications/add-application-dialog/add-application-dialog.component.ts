@@ -3,12 +3,13 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-add-application-dialog',
   templateUrl: './add-application-dialog.component.html',
   standalone: true,
-    imports: [MatFormFieldModule,ReactiveFormsModule,MatDialogModule, MatInputModule]
+    imports: [MatFormFieldModule,ReactiveFormsModule,MatDialogModule, MatInputModule, MatButtonModule]
 })
 export class AddApplicationDialogComponent {
   form: FormGroup;
