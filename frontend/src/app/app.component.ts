@@ -1,22 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ApplicationsService, ApplicationEntry } from './application.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  title = 'Applications';
-  entries: ApplicationEntry[] = [];
-  loading = true;
-  error: string | null = null;
+export class AppComponent {
+    title ="Application Tracker";
 
-  constructor(private api: ApplicationsService) {}
-
-  ngOnInit(): void {
-    this.api.list().subscribe({
-      next: (data: ApplicationEntry[]) => { this.entries = data; this.loading = false; },
-      error: (err: any) => { this.error = 'Failed to load entries'; this.loading = false; console.error(err); }
-    });
-  }
 }
