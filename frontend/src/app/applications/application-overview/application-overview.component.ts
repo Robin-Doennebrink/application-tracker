@@ -11,7 +11,6 @@ import {CommonModule} from "@angular/common";
   styleUrl: './application-overview.component.scss'
 })
 export class ApplicationOverviewComponent {
-  title = 'Applications';
   entries: ApplicationEntry[] = [];
   loading = true;
   error: string | null = null;
