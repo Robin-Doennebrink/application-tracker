@@ -380,7 +380,7 @@ pyrightconfig.json
 ./frontend/.gitignore
 ./frontend/.editorconfig
 frontend/node_modules/
-./frontend/.angular/**
+frontend/.angular/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,django,python
