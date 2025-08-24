@@ -3,6 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { Validators } from '@angular/forms';
 import {MatButtonModule} from "@angular/material/button";
 
 @Component({
@@ -20,9 +21,9 @@ export class AddApplicationDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.form = this.fb.group({
-      company: [''],
-      title: [''],
-      status: ['']
+      company: ['', Validators.required],
+      title: ['', Validators.required],
+      comment: ['', Validators.required]
     });
   }
 
