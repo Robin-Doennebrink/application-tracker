@@ -1,0 +1,37 @@
+import { Component, Inject } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+
+@Component({
+  selector: 'app-add-application-dialog',
+  templateUrl: './add-application-dialog.component.html',
+  standalone: true,
+    imports: [MatFormFieldModule,ReactiveFormsModule,MatDialogModule, MatInputModule]
+})
+export class AddApplicationDialogComponent {
+  form: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddApplicationDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.form = this.fb.group({
+      company: [''],
+      title: [''],
+      status: ['']
+    });
+  }
+
+  submit() {
+    if (this.form.valid) {
+      this.dialogRef.close(this.form.value);
+    }
+  }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+}

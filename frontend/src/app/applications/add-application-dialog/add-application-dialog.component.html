@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Add Application</h2>
+<form [formGroup]="form" (ngSubmit)="submit()" mat-dialog-content>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Company</mat-label>
+    <input matInput formControlName="company">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Job Title</mat-label>
+    <input matInput formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Status</mat-label>
+    <input matInput formControlName="status">
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" type="submit">Add</button>
+  </div>
+</form>
