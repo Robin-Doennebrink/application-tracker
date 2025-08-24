@@ -11,4 +11,8 @@ export class ApplicationsService {
   list(): Observable<ApplicationEntry[]> {
     return this.http.get<ApplicationEntry[]>(`${this.base}/api/applications/`);
   }
+
+  addApplication(applicationData: any): Observable<ApplicationEntry> {
+      return this.http.post<ApplicationEntry>(`${this.base}/api/applications/`, applicationData)
+  }
 }

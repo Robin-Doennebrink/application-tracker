@@ -36,7 +36,7 @@ export class ApplicationOverviewComponent {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         console.log('New application:', result);
-        // Add to your application list or send to backend
+        this.api.addApplication(result).subscribe()        // Add to your application list or send to backend
       }
     });
   }
