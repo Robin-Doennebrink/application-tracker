@@ -1,29 +1,28 @@
-<div class="header-with-button">
-  <h1>All applications</h1>
-  <button (click)="addApplication()">Add New</button>
-</div>
+<div class="mat-elevation-z2 table-container">
+  <table mat-table [dataSource]="entries" class="mat-table">
 
-<div *ngIf="loading">Loading…</div>
-<div *ngIf="error">{{ error }}</div>
+    <!-- Company -->
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef> Company </th>
+      <td mat-cell *matCellDef="let e"> {{ e.company }} </td>
+    </ng-container>
 
-<table *ngIf="!loading && !error">
-  <thead>
-    <tr>
-      <th>Company</th>
-      <th>Job Title</th>
-      <th>Job posting</th>
-      <th>Status</th>
-      <th>Max Stage</th>
-      <th>Application Date</th>
-      <th>Last Update</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let e of entries">
-      <td>{{ e.company }}</td>
-      <td>{{ e.job_title }}</td>
-      <td>{{ e.job_posting}}</td>
-      <td>
+    <!-- Job Title -->
+    <ng-container matColumnDef="jobTitle">
+      <th mat-header-cell *matHeaderCellDef> Job Title </th>
+      <td mat-cell *matCellDef="let e"> {{ e.job_title }} </td>
+    </ng-container>
+
+    <!-- Job Posting -->
+    <ng-container matColumnDef="jobPosting">
+      <th mat-header-cell *matHeaderCellDef> Job Posting </th>
+      <td mat-cell *matCellDef="let e"> {{ e.job_posting }} </td>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let e">
         <mat-form-field appearance="outline">
           <mat-select [value]="e.status" (selectionChange)="updateStatus(e, $event.value)">
             <mat-option *ngFor="let status of statusValues" [value]="status">
@@ -32,19 +31,37 @@
           </mat-select>
         </mat-form-field>
       </td>
-      <td>
-        <ng-container *ngIf="e.max_stage === 'none'; else showStageSelect">
-          <button mat-button color="primary" (click)="onStageChange(e, 'acknowledgment')">
+    </ng-container>
+
+    <!-- Max Stage -->
+    <ng-container matColumnDef="maxStage">
+      <th mat-header-cell *matHeaderCellDef> Max Stage </th>
+      <td mat-cell *matCellDef="let e">
+        <ng-container *ngIf="e.max_stage === 'none'; else showStage">
+          <button mat-button (click)="onStageChange(e, 'acknowledgment')">
             Received Acknowledgment
           </button>
         </ng-container>
-
-        <ng-template #showStageSelect>
-          {{ stageLabels[e.max_stage]}}
+        <ng-template #showStage>
+          {{ e.max_stage }}
         </ng-template>
       </td>
-      <td>{{ e.application_date }}</td>
-      <td>{{ e.last_update }}</td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <!-- Application Date -->
+    <ng-container matColumnDef="applicationDate">
+      <th mat-header-cell *matHeaderCellDef> Application Date </th>
+      <td mat-cell *matCellDef="let e"> {{ e.application_date }} </td>
+    </ng-container>
+
+    <!-- Last Update -->
+    <ng-container matColumnDef="lastUpdate">
+      <th mat-header-cell *matHeaderCellDef> Last Update </th>
+      <td mat-cell *matCellDef="let e"> {{ e.last_update }} </td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -10,13 +10,17 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import { Stage, StageValues, StageLabels } from '../../models/stage.enum';
 import {MatButtonModule} from "@angular/material/button";
+import {MatTableModule} from "@angular/material/table";
 
 @Component({
   selector: 'app-application-overview',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule,
+  imports: [CommonModule,
+    MatFormFieldModule,
     MatSelectModule,
-    MatOptionModule, MatButtonModule],
+    MatOptionModule,
+    MatButtonModule,
+    MatTableModule],
   templateUrl: './application-overview.component.html',
   styleUrl: './application-overview.component.scss'
 })
@@ -28,6 +32,17 @@ export class ApplicationOverviewComponent implements OnInit {
   statusValues = StatusValues;
   stageValues = StageValues;
   stageLabels = StageLabels;
+
+  displayedColumns: string[] = [
+    'company',
+    'jobTitle',
+    'jobPosting',
+    'status',
+    'maxStage',
+    'applicationDate',
+    'lastUpdate'
+  ];
+
 
   constructor(private api: ApplicationsService, private dialog: MatDialog) {}
 
