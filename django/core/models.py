@@ -43,7 +43,7 @@ class ApplicationEntry(models.Model):
     max_stage = models.CharField(                        # Maximale Stufe
         max_length=20,
         choices=Stage.choices,
-        default=Stage.ACKNOWLEDGMENT,
+        default=Stage.NONE,
     )
     last_update = models.DateField(auto_now=True)        # Last update
 

@@ -1,4 +1,5 @@
 export const StageValues = [
+  'none',
   'acknowledgment',
   'interview1',
   'interview2',
@@ -12,6 +13,7 @@ export const StageValues = [
 export type Stage = typeof StageValues[number];
 
 export const StageLabels: Record<Stage, string> = {
+  none: 'None',
   acknowledgment: 'Acknowledgment',
   interview1: 'Interview 1',
   interview2: 'Interview 2',
