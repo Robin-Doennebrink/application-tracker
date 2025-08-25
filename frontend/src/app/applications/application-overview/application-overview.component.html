@@ -33,15 +33,16 @@
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field appearance="outline">
-          <mat-select [value]="e.max_stage" (selectionChange)="onStageChange(e, $event.value)">
-            <mat-option *ngFor="let stage of stageValues" [value]="stage">
-              {{ stageLabels[stage] }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
+        <ng-container *ngIf="e.max_stage === 'none'; else showStageSelect">
+          <button mat-button color="primary" (click)="onStageChange(e, 'acknowledgment')">
+            Received Acknowledgment
+          </button>
+        </ng-container>
 
+        <ng-template #showStageSelect>
+          {{ stageLabels[e.max_stage]}}
+        </ng-template>
+      </td>
       <td>{{ e.application_date }}</td>
       <td>{{ e.last_update }}</td>
     </tr>
