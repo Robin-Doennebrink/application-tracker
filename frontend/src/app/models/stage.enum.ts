@@ -7,7 +7,6 @@ export const StageValues = [
   'interview4',
   'interview5',
   'offer',
-  'rejected',
 ] as const;
 
 export type Stage = typeof StageValues[number];
@@ -21,5 +20,4 @@ export const StageLabels: Record<Stage, string> = {
   interview4: 'Interview 4',
   interview5: 'Interview 5',
   offer: 'Offer',
-  rejected: 'Rejected',
 };
