@@ -1,42 +1,30 @@
-nav a {
-  color: white;
-  margin-right: 1rem;
-  text-decoration: none;
-}
-
-main {
-  padding: 2rem;
-}
-
-/* Ensure body and html stretch full height */
 html, body {
   height: 100%;
   margin: 0;
 }
 
-/* Flexbox layout for the container */
 .layout-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 100% of viewport height */
+  height: 100vh; /* full viewport height */
 }
 
-/* Main content should expand to fill space */
-main {
-  flex: 1;
-  padding: 1rem;
-}
-
-/* Optional styles */
 header {
   background-color: #1976d2;
   color: white;
   padding: 1rem;
+  flex-shrink: 0; /* don't shrink */
 }
 
 footer {
   background-color: #f5f5f5;
   text-align: center;
   padding: 1rem;
+  flex-shrink: 0; /* don't shrink */
 }
 
+main {
+  flex: 1 1 auto;
+  overflow-y: auto; /* makes main scrollable */
+  padding: 2rem;
+}
