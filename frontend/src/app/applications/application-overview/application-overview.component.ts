@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApplicationEntry} from "../../models/application-entry.model";
 import {ApplicationsService} from "../../services/application.service";
 import {CommonModule} from "@angular/common";
@@ -12,7 +12,7 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './application-overview.component.html',
   styleUrl: './application-overview.component.scss'
 })
-export class ApplicationOverviewComponent {
+export class ApplicationOverviewComponent implements OnInit {
   entries: ApplicationEntry[] = [];
   loading = true;
   error: string | null = null;
@@ -36,7 +36,14 @@ export class ApplicationOverviewComponent {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         console.log('New application:', result);
-        this.api.addApplication(result).subscribe()        // Add to your application list or send to backend
+        this.api.addApplication(result).subscribe({
+          next: (newEntry) => {
+            this.entries = [newEntry, ...this.entries];
+          },
+          error: (err) => {
+            console.error('Failed to add application', err);
+          }
+        });
       }
     });
   }
