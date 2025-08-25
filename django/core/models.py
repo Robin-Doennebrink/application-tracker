@@ -21,6 +21,7 @@ class ApplicationEntry(models.Model):
         REJECTED = "rejected", "Rejected"
 
     class Stage(models.TextChoices):
+        NONE = "none", "None"
         ACKNOWLEDGMENT = "acknowledgment", "Acknowledgment"
         INTERVIEW1 = "interview1", "Interview 1"
         INTERVIEW2 = "interview2", "Interview 2"
