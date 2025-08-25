@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {RouterOutlet, Routes} from "@angular/router";
 import { RouterModule } from '@angular/router';
@@ -12,12 +12,9 @@ const routes: Routes = [
     {path: '', component: ApplicationOverviewComponent}
 ]
 
-@NgModule({
-    declarations: [AppComponent],
-    imports: [BrowserModule, HttpClientModule, RouterOutlet, RouterModule.forRoot(routes), BrowserAnimationsModule ],
-    bootstrap: [AppComponent],
-    providers: [
-      provideAnimationsAsync()
-    ]
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule, RouterOutlet, RouterModule.forRoot(routes), BrowserAnimationsModule], providers: [
+        provideAnimationsAsync(),
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
