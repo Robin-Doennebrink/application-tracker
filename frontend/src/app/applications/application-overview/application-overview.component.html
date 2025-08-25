@@ -25,9 +25,11 @@
       <td mat-cell *matCellDef="let e">
         <mat-form-field appearance="outline">
           <mat-select [value]="e.status" (selectionChange)="updateStatus(e, $event.value)">
-            <mat-option *ngFor="let status of statusValues" [value]="status">
-              {{ statusLabels[status] }}
-            </mat-option>
+            @for (status of statusValues; track status) {
+              <mat-option [value]="status">
+                {{ statusLabels[status] }}
+              </mat-option>
+            }feat
           </mat-select>
         </mat-form-field>
       </td>
@@ -37,14 +39,13 @@
     <ng-container matColumnDef="maxStage">
       <th mat-header-cell *matHeaderCellDef> Max Stage </th>
       <td mat-cell *matCellDef="let e">
-        <ng-container *ngIf="e.max_stage === 'none'; else showStage">
+        @if (e.max_stage === 'none') {
           <button mat-button (click)="onStageChange(e, 'acknowledgment')">
             Received Acknowledgment
           </button>
-        </ng-container>
-        <ng-template #showStage>
+        } @else {
           {{ getStageLabel(e.max_stage) }}
-        </ng-template>
+        }
       </td>
     </ng-container>
 
