@@ -12,3 +12,13 @@ class ApplicationEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = ApplicationEntry
         fields = "__all__"
+
+    def update(self, instance, validated_data):
+        # Check if 'status' is being updated
+        new_status = validated_data.get("status")
+
+        if new_status:
+            # When status changes, update max_stage too
+            validated_data["max_stage"] = new_status
+
+        return super().update(instance, validated_data)
