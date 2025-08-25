@@ -62,7 +62,6 @@ export class ApplicationOverviewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        console.log('New application:', result);
         this.api.addApplication(result).subscribe({
           next: (newEntry) => {
             this.entries = [newEntry, ...this.entries];
