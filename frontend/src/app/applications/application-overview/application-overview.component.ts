@@ -9,13 +9,14 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import { Stage, StageValues, StageLabels } from '../../models/stage.enum';
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-application-overview',
   standalone: true,
   imports: [CommonModule, MatFormFieldModule,
     MatSelectModule,
-    MatOptionModule],
+    MatOptionModule, MatButtonModule],
   templateUrl: './application-overview.component.html',
   styleUrl: './application-overview.component.scss'
 })
