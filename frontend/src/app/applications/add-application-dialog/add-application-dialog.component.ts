@@ -29,7 +29,7 @@ export class AddApplicationDialogComponent {
     this.form = this.fb.group({
       company: ['', Validators.required],
       job_title: ['', Validators.required],
-      link_to_job_advertisement: ['', Validators.required],
+      job_posting: ['', Validators.required],
       comment: ['', Validators.required],
       application_date: [new Date(), Validators.required],
     });

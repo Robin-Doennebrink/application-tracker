@@ -11,6 +11,7 @@
     <tr>
       <th>Company</th>
       <th>Job Title</th>
+      <th>Job posting</th>
       <th>Status</th>
       <th>Max Stage</th>
       <th>Application Date</th>
@@ -21,6 +22,7 @@
     <tr *ngFor="let e of entries">
       <td>{{ e.company }}</td>
       <td>{{ e.job_title }}</td>
+      <td>{{ e.job_posting}}</td>
       <td>{{ e.status }}</td>
       <td>{{ e.max_stage }}</td>
       <td>{{ e.application_date }}</td>
