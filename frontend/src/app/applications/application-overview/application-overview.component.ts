@@ -22,7 +22,7 @@ import {MatTableModule} from "@angular/material/table";
     MatButtonModule,
     MatTableModule],
   templateUrl: './application-overview.component.html',
-  styleUrl: './application-overview.component.scss'
+  styleUrls: ['./application-overview.component.scss']
 })
 export class ApplicationOverviewComponent implements OnInit {
   entries: ApplicationEntry[] = [];
