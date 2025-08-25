@@ -23,8 +23,25 @@
       <td>{{ e.company }}</td>
       <td>{{ e.job_title }}</td>
       <td>{{ e.job_posting}}</td>
-      <td>{{ e.status }}</td>
-      <td>{{ e.max_stage }}</td>
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-select [value]="e.status" (selectionChange)="updateStatus(e, $event.value)">
+            <mat-option *ngFor="let status of statusValues" [value]="status">
+              {{ statusLabels[status] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-select [value]="e.max_stage" (selectionChange)="onStageChange($event.value, e)">
+            <mat-option *ngFor="let stage of stageValues" [value]="stage">
+              {{ stageLabels[stage] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
       <td>{{ e.application_date }}</td>
       <td>{{ e.last_update }}</td>
     </tr>

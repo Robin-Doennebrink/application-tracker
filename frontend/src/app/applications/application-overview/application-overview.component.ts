@@ -4,11 +4,18 @@ import {ApplicationsService} from "../../services/application.service";
 import {CommonModule} from "@angular/common";
 import {AddApplicationDialogComponent} from "../add-application-dialog/add-application-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {Status, StatusLabels, StatusValues} from "../../models/status.enum";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
+import { Stage, StageValues, StageLabels } from '../../models/stage.enum';
 
 @Component({
   selector: 'app-application-overview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule],
   templateUrl: './application-overview.component.html',
   styleUrl: './application-overview.component.scss'
 })
@@ -16,6 +23,10 @@ export class ApplicationOverviewComponent implements OnInit {
   entries: ApplicationEntry[] = [];
   loading = true;
   error: string | null = null;
+  statusLabels = StatusLabels;
+  statusValues = StatusValues;
+  stageValues = StageValues;
+  stageLabels = StageLabels;
 
   constructor(private api: ApplicationsService, private dialog: MatDialog) {}
 
@@ -47,5 +58,14 @@ export class ApplicationOverviewComponent implements OnInit {
       }
     });
   }
+
+  updateStatus(entry: ApplicationEntry, newStatus: Status) {
+    console.log("tset")
+  }
+
+  onStageChange(newStage: Stage, entry: ApplicationEntry): void {
+    console.log("New stage:", newStage);
+  }
+
 
 }
