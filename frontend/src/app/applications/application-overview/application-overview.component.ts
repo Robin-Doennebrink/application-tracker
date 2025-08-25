@@ -92,5 +92,10 @@ export class ApplicationOverviewComponent implements OnInit {
     });
   }
 
+  getStageLabel(stage: string): string {
+    return this.stageLabels[stage as Stage] ?? 'Unknown';
+  }
+
+
 
 }
