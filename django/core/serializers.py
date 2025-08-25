@@ -19,6 +19,7 @@ class ApplicationEntrySerializer(serializers.ModelSerializer):
 
         if new_status:
             # When status changes, update max_stage too
-            validated_data["max_stage"] = new_status
+            if new_status != ApplicationEntry.Stage.REJECTED:
+                validated_data["max_stage"] = new_status
 
         return super().update(instance, validated_data)
