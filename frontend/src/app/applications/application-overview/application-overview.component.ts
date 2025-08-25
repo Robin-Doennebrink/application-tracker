@@ -60,11 +60,21 @@ export class ApplicationOverviewComponent implements OnInit {
   }
 
   updateStatus(entry: ApplicationEntry, newStatus: Status) {
-    console.log("tset")
+    this.api.patchApplication(entry.id, {"status": newStatus}).subscribe({
+      next: updated => {
+        entry.max_stage = updated.max_stage;
+      },
+      error: err => console.error('Update failed', err)
+    });
   }
 
-  onStageChange(newStage: Stage, entry: ApplicationEntry): void {
-    console.log("New stage:", newStage);
+  onStageChange(entry: ApplicationEntry, newStage: Stage): void {
+    this.api.patchApplication(entry.id, {"max_stage": newStage}).subscribe({
+      next: updated => {
+        entry.max_stage = updated.max_stage;
+      },
+      error: err => console.error('Update failed', err)
+    });
   }
 
 

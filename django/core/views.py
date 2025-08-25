@@ -14,4 +14,7 @@ class ApplicationEntryListAPI(generics.ListCreateAPIView):
     queryset = ApplicationEntry.objects.all().order_by("-last_update")
     serializer_class = ApplicationEntrySerializer
 
+class ApplicationEntryDetailAPI(generics.RetrieveUpdateAPIView):
+    queryset = ApplicationEntry.objects.all()
+    serializer_class = ApplicationEntrySerializer
 

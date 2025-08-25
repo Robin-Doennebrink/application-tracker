@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {ApplicationEntry} from "../models/application-entry.model";
+import {Status} from "../models/status.enum";
 
 @Injectable({ providedIn: 'root' })
 export class ApplicationsService {
@@ -14,5 +15,12 @@ export class ApplicationsService {
 
   addApplication(applicationData: any): Observable<ApplicationEntry> {
       return this.http.post<ApplicationEntry>(`${this.base}/api/applications/`, applicationData)
+  }
+
+  patchApplication(
+      id: number,
+      changes: Partial<ApplicationEntry>
+  ): Observable<ApplicationEntry> {
+    return this.http.patch<ApplicationEntry>(`${this.base}/api/applications/${id}/`, changes);
   }
 }

@@ -34,7 +34,7 @@
       </td>
       <td>
         <mat-form-field appearance="outline">
-          <mat-select [value]="e.max_stage" (selectionChange)="onStageChange($event.value, e)">
+          <mat-select [value]="e.max_stage" (selectionChange)="onStageChange(e, $event.value)">
             <mat-option *ngFor="let stage of stageValues" [value]="stage">
               {{ stageLabels[stage] }}
             </mat-option>
