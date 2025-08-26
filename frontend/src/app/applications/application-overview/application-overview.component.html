@@ -1,74 +1,75 @@
-<div class="header-with-button" xmlns="http://www.w3.org/1999/html">
-  <h1>All applications</h1>
-  <button (click)="addApplication()">Add New</button>
-</div>
-<div class="table-wrapper mat-elevation-z2">
-  <table mat-table [dataSource]="entries" class="mat-table full-width-table">
-    <!-- Header and Row Declarations -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<div class="application-wrapper">
+  <div class="header-with-button" xmlns="http://www.w3.org/1999/html">
+    <h1>All applications</h1>
+    <button (click)="addApplication()">Add New</button>
+  </div>
+  <div class="table-container ">
+    <table mat-table [dataSource]="entries" class="mat-table full-width-table">
+      <!-- Header and Row Declarations -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <!-- Company -->
-    <ng-container matColumnDef="company">
-      <th mat-header-cell *matHeaderCellDef sticky> Company </th>
-      <td mat-cell *matCellDef="let e"> {{ e.company }} </td>
-    </ng-container>
+      <!-- Company -->
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef sticky> Company </th>
+        <td mat-cell *matCellDef="let e"> {{ e.company }} </td>
+      </ng-container>
 
-    <!-- Job Title -->
-    <ng-container matColumnDef="jobTitle">
-      <th mat-header-cell *matHeaderCellDef sticky> Job Title </th>
-      <td mat-cell *matCellDef="let e"> {{ e.job_title }} </td>
-    </ng-container>
+      <!-- Job Title -->
+      <ng-container matColumnDef="jobTitle">
+        <th mat-header-cell *matHeaderCellDef sticky> Job Title </th>
+        <td mat-cell *matCellDef="let e"> {{ e.job_title }} </td>
+      </ng-container>
 
-    <!-- Job Posting -->
-    <ng-container matColumnDef="jobPosting">
-      <th mat-header-cell *matHeaderCellDef sticky> Job Posting </th>
-      <td mat-cell *matCellDef="let e"> {{ e.job_posting }} </td>
-    </ng-container>
+      <!-- Job Posting -->
+      <ng-container matColumnDef="jobPosting">
+        <th mat-header-cell *matHeaderCellDef sticky> Job Posting </th>
+        <td mat-cell *matCellDef="let e"> {{ e.job_posting }} </td>
+      </ng-container>
 
-    <!-- Status -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef sticky> Status </th>
-      <td mat-cell *matCellDef="let e">
-        <mat-form-field appearance="outline">
-          <mat-select [value]="e.status" (selectionChange)="updateStatus(e, $event.value)">
-            @for (status of statusValues; track status) {
-              <mat-option [value]="status">
-                {{ statusLabels[status] }}
-              </mat-option>
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef sticky> Status </th>
+        <td mat-cell *matCellDef="let e">
+          <mat-form-field appearance="outline">
+            <mat-select [value]="e.status" (selectionChange)="updateStatus(e, $event.value)">
+              @for (status of statusValues; track status) {
+                <mat-option [value]="status">
+                  {{ statusLabels[status] }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <!-- Max Stage -->
+      <ng-container matColumnDef="maxStage">
+        <th mat-header-cell *matHeaderCellDef sticky> Max Stage </th>
+        <td mat-cell *matCellDef="let e">
+          <span>
+            @if (e.max_stage === 'none') {
+              <button mat-raised-button mat-button (click)="onStageChange(e, 'acknowledgment')">
+                Received Acknowledgment
+              </button>
+            } @else {
+              {{ getStageLabel(e.max_stage) }}
             }
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </ng-container>
+          </span>
+        </td>
+      </ng-container>
 
-    <!-- Max Stage -->
-    <ng-container matColumnDef="maxStage">
-      <th mat-header-cell *matHeaderCellDef sticky> Max Stage </th>
-      <td mat-cell *matCellDef="let e">
-        <span>
-          @if (e.max_stage === 'none') {
-            <button mat-raised-button mat-button (click)="onStageChange(e, 'acknowledgment')">
-              Received Acknowledgment
-            </button>
-          } @else {
-            {{ getStageLabel(e.max_stage) }}
-          }
-        </span>
-      </td>
-    </ng-container>
+      <!-- Application Date -->
+      <ng-container matColumnDef="applicationDate">
+        <th mat-header-cell *matHeaderCellDef sticky> Application Date </th>
+        <td mat-cell *matCellDef="let e"> {{ e.application_date }} </td>
+      </ng-container>
 
-    <!-- Application Date -->
-    <ng-container matColumnDef="applicationDate">
-      <th mat-header-cell *matHeaderCellDef sticky> Application Date </th>
-      <td mat-cell *matCellDef="let e"> {{ e.application_date }} </td>
-    </ng-container>
-
-    <!-- Last Update -->
-    <ng-container matColumnDef="lastUpdate">
-      <th mat-header-cell *matHeaderCellDef sticky> Last Update </th>
-      <td mat-cell *matCellDef="let e"> {{ e.last_update }} </td>
-    </ng-container>
-  </table>
+      <!-- Last Update -->
+      <ng-container matColumnDef="lastUpdate">
+        <th mat-header-cell *matHeaderCellDef sticky> Last Update </th>
+        <td mat-cell *matCellDef="let e"> {{ e.last_update }} </td>
+      </ng-container>
+    </table>
+  </div>
 </div>
-

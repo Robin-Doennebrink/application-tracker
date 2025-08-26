@@ -1,7 +1,8 @@
 .table-container {
-  max-height: 500px;
+  flex: 1 1 auto;
   overflow-y: auto;
   display: block;
+  max-height: 100%;
 }
 
 .mat-header-row {
@@ -25,5 +26,11 @@ th, td {
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
+}
+
+.application-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
