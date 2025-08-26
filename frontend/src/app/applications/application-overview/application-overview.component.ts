@@ -40,7 +40,7 @@ export class ApplicationOverviewComponent implements OnInit {
 
   displayedColumns: string[] = [
     'company',
-    'jobTitle',
+    'job_title',
     'jobPosting',
     'status',
     'maxStage',
