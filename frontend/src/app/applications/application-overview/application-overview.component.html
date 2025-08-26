@@ -36,7 +36,14 @@
 
       <!-- Job Posting -->
       <ng-container matColumnDef="jobPosting">
-        <th mat-header-cell *matHeaderCellDef sticky> Job Posting </th>
+        <th mat-header-cell *matHeaderCellDef sticky>
+          <div>
+            <div>Job Posting</div>
+            <input matInput
+                   (input)="applyColumnFilter('job_posting', $event.target.value)"
+                   placeholder="Filter" />
+          </div>
+        </th>
         <td mat-cell *matCellDef="let e"> {{ e.job_posting }} </td>
       </ng-container>
 
