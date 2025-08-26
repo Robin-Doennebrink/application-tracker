@@ -10,7 +10,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import { Stage, StageValues, StageLabels } from '../../models/stage.enum';
 import {MatButtonModule} from "@angular/material/button";
-import {MatTableModule} from "@angular/material/table";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import {MatInputModule} from "@angular/material/input";
 
 @Component({
   selector: 'app-application-overview',
@@ -20,12 +21,16 @@ import {MatTableModule} from "@angular/material/table";
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
-    MatTableModule],
+    MatTableModule,
+    MatInputModule ],
   templateUrl: './application-overview.component.html',
   styleUrls: ['./application-overview.component.scss']
 })
 export class ApplicationOverviewComponent implements OnInit {
+  // Raw data array
   entries: ApplicationEntry[] = [];
+  // MatTableDataSource for table features (sorting, filtering)
+  dataSource = new MatTableDataSource<ApplicationEntry>();
   loading = true;
   error: string | null = null;
   statusLabels = StatusLabels;
@@ -42,16 +47,39 @@ export class ApplicationOverviewComponent implements OnInit {
     'applicationDate',
     'lastUpdate'
   ];
+  filterValues: { [key: string]: string } = {};
 
 
   constructor(private api: ApplicationsService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.api.list().subscribe({
-      next: (data: ApplicationEntry[]) => { this.entries = data; this.loading = false; },
-      error: (err: any) => { this.error = 'Failed to load entries'; this.loading = false; console.error(err); }
+      next: (data: ApplicationEntry[]) => {
+        this.dataSource.data = data;
+        this.entries = data;
+
+        // Custom filter predicate for column-wise filtering
+        this.dataSource.filterPredicate = (data: ApplicationEntry, filter: string): boolean => {
+          const filterObj = JSON.parse(filter);
+          return Object.keys(filterObj).every(column => {
+            const filterValue = filterObj[column];
+            if (!filterValue) {
+              return true; // no filter for this column
+            }
+            const cellValue = (data as any)[column];
+            return cellValue?.toString().toLowerCase().includes(filterValue);
+          });
+        };
+
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load entries';
+        this.loading = false;
+      }
     });
   }
+
 
   addApplication(): void {
       const dialogRef = this.dialog.open(AddApplicationDialogComponent, {
@@ -95,6 +123,12 @@ export class ApplicationOverviewComponent implements OnInit {
   getStageLabel(stage: string): string {
     return this.stageLabels[stage as Stage] ?? 'Unknown';
   }
+
+  applyColumnFilter(column: string, value: string): void {
+    this.filterValues[column] = value.trim().toLowerCase();
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+  }
+
 
 
 
