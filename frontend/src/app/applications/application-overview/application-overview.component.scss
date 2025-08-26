@@ -1,5 +1,19 @@
-table {
+.table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  display: block;
+}
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: white;
+}
+
+.mat-table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 th, td {
@@ -12,3 +26,4 @@ th, td {
   justify-content: flex-start;
   gap: 1rem;
 }
+
