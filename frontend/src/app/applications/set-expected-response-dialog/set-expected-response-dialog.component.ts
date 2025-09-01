@@ -7,10 +7,13 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import {Status} from "../../models/status.enum";
 
-export interface SetExpectedResponseDialogData {
-  currentDate?: string | null;
+export interface StatusDialogData {
+  company: string;
+  status: Status;
 }
+
 
 @Component({
   selector: 'app-set-expected-response-dialog',
@@ -33,11 +36,10 @@ export class SetExpectedResponseDialogComponent {
   constructor(
       private fb: FormBuilder,
       public dialogRef: MatDialogRef<SetExpectedResponseDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: SetExpectedResponseDialogData
+      @Inject(MAT_DIALOG_DATA) public data: StatusDialogData
   ) {
     this.form = this.fb.group({
       expected_response_date: [
-        this.parseIsoDate(data?.currentDate) ?? null,
         Validators.required
       ],
     });

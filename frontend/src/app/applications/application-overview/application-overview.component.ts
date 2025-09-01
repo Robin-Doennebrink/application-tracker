@@ -140,13 +140,10 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
     const patch = (payload: Partial<ApplicationEntry>) => {
       this.api.patchApplication(entry.id, payload).subscribe({
         next: updated => {
-          // Status übernehmen
           entry.status = (updated as any)?.status ?? newStatus;
-          // Optionales expected_response_date übernehmen (aus Backend oder gesendetem Wert)
           if ('expected_response_date' in payload) {
             entry.expected_response_date = (updated as any)?.expected_response_date ?? payload.expected_response_date ?? null;
           }
-          // Bestehendes Verhalten: max_stage aus Backend übernehmen, falls gesetzt
           if ((updated as any)?.max_stage) {
             entry.max_stage = (updated as any).max_stage;
           }
@@ -158,7 +155,7 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
     if (isInterview) {
       const dialogRef = this.dialog.open(SetExpectedResponseDialogComponent, {
         width: '360px',
-        data: { currentDate: entry.expected_response_date ?? null }
+        data: { company: entry.company, status: newStatus }
       });
 
       dialogRef.afterClosed().subscribe(result => {
