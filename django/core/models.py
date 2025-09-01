@@ -45,6 +45,7 @@ class ApplicationEntry(models.Model):
         choices=Stage.choices,
         default=Stage.NONE,
     )
+    expected_response_date = models.DateField(blank=True, null=True)  # Date you expect to hear back (for interview)
     last_update = models.DateField(auto_now=True)        # Last update
 
     def __str__(self):

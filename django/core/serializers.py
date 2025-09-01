@@ -21,5 +21,8 @@ class ApplicationEntrySerializer(serializers.ModelSerializer):
             # When status changes, update max_stage too
             if new_status != ApplicationEntry.Stage.REJECTED:
                 validated_data["max_stage"] = new_status
+        # Set expected_response_date to None if status is not an interview
+        if not new_status.startswith("interview"):
+            validated_data["expected_response_date"] = None
 
         return super().update(instance, validated_data)
