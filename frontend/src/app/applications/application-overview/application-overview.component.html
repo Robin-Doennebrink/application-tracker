@@ -88,10 +88,12 @@
       <!-- Max Stage -->
       <ng-container matColumnDef="max_stage">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div> Max Stage </div>
-          <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
-            <input matInput placeholder="Filter" />
-          </mat-form-field>
+          <div>
+            <div> Max Stage </div>
+            <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
+              <input matInput placeholder="Filter" />
+            </mat-form-field>
+          </div>
         </th>
         <td mat-cell *matCellDef="let e">
           <span>
@@ -110,10 +112,12 @@
       <!-- Application Date -->
       <ng-container matColumnDef="application_date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div> Application Date </div>
-          <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
-            <input matInput placeholder="Filter" />
-          </mat-form-field>
+          <div>
+            <div> Application Date </div>
+            <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
+              <input matInput placeholder="Filter" />
+            </mat-form-field>
+          </div>
         </th>
         <td mat-cell *matCellDef="let e"> {{ e.application_date }} </td>
       </ng-container>
@@ -122,12 +126,15 @@
       <!-- Last Update -->
       <ng-container matColumnDef="last_update">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div> Last Update </div>
-          <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
-            <input matInput placeholder="Filter" />
-          </mat-form-field>
+          <div>
+            <div> Last Update </div>
+            <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
+              <input matInput placeholder="Filter" />
+            </mat-form-field>
+          </div>
         </th>
         <td mat-cell *matCellDef="let e"> {{ e.last_update }} </td>
+
       </ng-container>
 
     </table>
