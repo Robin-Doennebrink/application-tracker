@@ -12,6 +12,9 @@ import { Stage, StageValues, StageLabels } from '../../models/stage.enum';
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { ViewChild, AfterViewInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-application-overview',
@@ -22,11 +25,13 @@ import {MatInputModule} from "@angular/material/input";
     MatOptionModule,
     MatButtonModule,
     MatTableModule,
-    MatInputModule ],
+    MatInputModule,
+    MatSortModule
+  ],
   templateUrl: './application-overview.component.html',
   styleUrls: ['./application-overview.component.scss']
 })
-export class ApplicationOverviewComponent implements OnInit {
+export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
   // Raw data array
   entries: ApplicationEntry[] = [];
   // MatTableDataSource for table features (sorting, filtering)
@@ -37,6 +42,8 @@ export class ApplicationOverviewComponent implements OnInit {
   statusValues = StatusValues;
   stageValues = StageValues;
   stageLabels = StageLabels;
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = [
     'company',
@@ -58,23 +65,64 @@ export class ApplicationOverviewComponent implements OnInit {
         this.dataSource.data = data;
         this.entries = data;
 
-        // Custom filter predicate for column-wise filtering
-        this.dataSource.filterPredicate = (data: ApplicationEntry, filter: string): boolean => {
-          const filterObj = JSON.parse(filter);
-          return Object.keys(filterObj).every(column => {
-            const filterValue = filterObj[column];
-            if (!filterValue) {
-              return true; // no filter for this column
-            }
-            const cellValue = (data as any)[column];
-            return cellValue?.toString().toLowerCase().includes(filterValue);
+        this.dataSource.filterPredicate = (row: ApplicationEntry, filter: string): boolean => {
+          const filterObj: Record<string, string> = filter ? JSON.parse(filter) : {};
+
+          const fieldMap: Record<string, keyof ApplicationEntry> = {
+            company: 'company',
+            job_title: 'job_title',
+            jobPosting: 'job_posting',
+            job_posting: 'job_posting',
+            status: 'status',
+            maxStage: 'max_stage',
+            max_stage: 'max_stage',
+            applicationDate: 'application_date',
+            application_date: 'application_date',
+            lastUpdate: 'last_update',
+            last_update: 'last_update',
+          };
+
+          return Object.keys(filterObj).every(col => {
+            const raw = filterObj[col];
+            if (!raw) return true;
+
+            const key = fieldMap[col] ?? (col as keyof ApplicationEntry);
+            const cell = (row as any)[key];
+
+            const cellText = cell != null ? String(cell).toLowerCase() : '';
+            const filterText = String(raw).toLowerCase();
+            return cellText.includes(filterText);
           });
+        };
+
+
+        this.dataSource.sortingDataAccessor = (item: ApplicationEntry, columnId: string): string | number => {
+          switch (columnId) {
+            case 'jobPosting':
+              return item.job_posting?.toLowerCase() ?? '';
+            case 'applicationDate':
+              return new Date(item.application_date as any).getTime() || 0;
+            case 'lastUpdate':
+              return new Date(item.last_update as any).getTime() || 0;
+            case 'status':
+              return (this.statusLabels[item.status] ?? item.status ?? '').toLowerCase();
+            case 'maxStage':
+              const idx = this.stageValues.indexOf(item.max_stage as any);
+              return idx >= 0 ? idx : Number.POSITIVE_INFINITY;
+            case 'company':
+              return item.company?.toLowerCase() ?? '';
+            case 'job_title':
+              return item.job_title?.toLowerCase() ?? '';
+            default:
+              return (item as any)[columnId]?.toString().toLowerCase() ?? '';
+          }
         };
 
         this.loading = false;
       },
       error: (err) => {
         this.error = 'Failed to load entries';
+        console.error(err);
         this.loading = false;
       }
     });
@@ -129,6 +177,10 @@ export class ApplicationOverviewComponent implements OnInit {
     this.dataSource.filter = JSON.stringify(this.filterValues);
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+
+  }
 
 
 

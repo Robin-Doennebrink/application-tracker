@@ -4,14 +4,14 @@
     <button (click)="addApplication()">Add New</button>
   </div>
   <div class="table-container ">
-    <table mat-table [dataSource]="dataSource" class="mat-table full-width-table">
+    <table mat-table [dataSource]="dataSource" class="mat-table full-width-table" matSort>
       <!-- Header and Row Declarations -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       <!-- Company -->
       <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div>
             <div>Company</div>
             <mat-form-field appearance="outline">
@@ -25,7 +25,7 @@
       </ng-container>
       <!-- Job Title -->
       <ng-container matColumnDef="job_title">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div>
             <div>Job Title</div>
             <mat-form-field appearance="outline">
@@ -40,7 +40,7 @@
 
       <!-- Job Posting -->
       <ng-container matColumnDef="jobPosting">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div>
             <div>Job Posting</div>
             <mat-form-field appearance="outline">
@@ -55,7 +55,7 @@
 
       <!-- Status -->
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div>
             <div>Status</div>
             <mat-form-field appearance="outline">
@@ -87,7 +87,7 @@
 
       <!-- Max Stage -->
       <ng-container matColumnDef="maxStage">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div> Max Stage </div>
           <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
             <input matInput placeholder="Filter" />
@@ -109,7 +109,7 @@
 
       <!-- Application Date -->
       <ng-container matColumnDef="applicationDate">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef >
           <div> Application Date </div>
           <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
             <input matInput placeholder="Filter" />
