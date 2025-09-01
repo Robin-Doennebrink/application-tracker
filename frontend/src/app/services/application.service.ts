@@ -23,4 +23,9 @@ export class ApplicationsService {
   ): Observable<ApplicationEntry> {
     return this.http.patch<ApplicationEntry>(`${this.base}/api/applications/${id}/`, changes);
   }
+
+  listInterviews(): Observable<ApplicationEntry[]> {
+    return this.http.get<ApplicationEntry[]>(`${this.base}/api/application/interviews/`);
+  }
+
 }
