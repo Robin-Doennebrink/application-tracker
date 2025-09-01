@@ -122,6 +122,21 @@
         <td mat-cell *matCellDef="let e"> {{ e.application_date }} </td>
       </ng-container>
 
+      <!-- Comment (not sortable) -->
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef>
+          <div>
+            <div>Comment</div>
+            <mat-form-field appearance="outline" class="header-filter header-spacer" aria-hidden="true">
+              <input matInput placeholder="Filter" />
+            </mat-form-field>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let e">
+          {{ e.comment }}
+        </td>
+      </ng-container>
+
       <!-- Last Update -->
       <ng-container matColumnDef="last_update">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>

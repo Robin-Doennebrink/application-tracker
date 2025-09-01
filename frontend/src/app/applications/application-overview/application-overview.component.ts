@@ -54,6 +54,7 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
     'job_posting',
     'status',
     'max_stage',
+    'comment',
     'application_date',
     'last_update'
   ];
