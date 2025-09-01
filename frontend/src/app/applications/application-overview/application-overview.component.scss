@@ -41,3 +41,8 @@ th, td {
   flex-direction: column;
   height: 100%;
 }
+
+.header-spacer {
+  visibility: hidden;
+  pointer-events: none;
+}
