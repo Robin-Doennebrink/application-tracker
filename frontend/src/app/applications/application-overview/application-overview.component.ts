@@ -48,11 +48,11 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'company',
     'job_title',
-    'jobPosting',
+    'job_posting',
     'status',
-    'maxStage',
-    'applicationDate',
-    'lastUpdate'
+    'max_stage',
+    'application_date',
+    'last_update'
   ];
   filterValues: { [key: string]: string } = {};
 
@@ -66,53 +66,38 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
         this.entries = data;
 
         this.dataSource.filterPredicate = (row: ApplicationEntry, filter: string): boolean => {
-          const filterObj: Record<string, string> = filter ? JSON.parse(filter) : {};
+          if (!filter) return true;
 
-          const fieldMap: Record<string, keyof ApplicationEntry> = {
-            company: 'company',
-            job_title: 'job_title',
-            job_posting: 'job_posting',
-            status: 'status',
-            max_stage: 'max_stage',
-            application_date: 'application_date',
-            last_update: 'last_update',
-          };
+          let filterObj: Record<string, string>;
+          try {
+            filterObj = JSON.parse(filter);
+          } catch {
+            return true;
+          }
 
           return Object.keys(filterObj).every(col => {
             const raw = filterObj[col];
             if (!raw) return true;
 
-            const key = fieldMap[col] ?? (col as keyof ApplicationEntry);
-            const cell = (row as any)[key];
-
+            const cell = (row as any)[col];
             const cellText = cell != null ? String(cell).toLowerCase() : '';
             const filterText = String(raw).toLowerCase();
             return cellText.includes(filterText);
           });
         };
 
-
         this.dataSource.sortingDataAccessor = (item: ApplicationEntry, columnId: string): string | number => {
-          switch (columnId) {
-            case 'jobPosting':
-              return item.job_posting?.toLowerCase() ?? '';
-            case 'applicationDate':
-              return new Date(item.application_date as any).getTime() || 0;
-            case 'lastUpdate':
-              return new Date(item.last_update as any).getTime() || 0;
-            case 'status':
-              return (this.statusLabels[item.status] ?? item.status ?? '').toLowerCase();
-            case 'maxStage':
-              const idx = this.stageValues.indexOf(item.max_stage as any);
-              return idx >= 0 ? idx : Number.POSITIVE_INFINITY;
-            case 'company':
-              return item.company?.toLowerCase() ?? '';
-            case 'job_title':
-              return item.job_title?.toLowerCase() ?? '';
-            default:
-              return (item as any)[columnId]?.toString().toLowerCase() ?? '';
+          if (columnId === 'application_date' || columnId === 'last_update') {
+            return new Date((item as any)[columnId]).getTime() || 0;
           }
+          if (columnId === 'max_stage') {
+            const idx = this.stageValues.indexOf(item.max_stage);
+            return idx >= 0 ? idx : Number.POSITIVE_INFINITY;
+          }
+          const v = (item as any)[columnId];
+          return v != null ? v.toString().toLowerCase() : '';
         };
+
 
         this.loading = false;
       },
