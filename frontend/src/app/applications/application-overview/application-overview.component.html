@@ -14,7 +14,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Company</div>
-            <mat-form-field appearance="outline" class="header-filter">
+            <mat-form-field appearance="outline">
               <input matInput
                      (input)="applyColumnFilter('company', $event.target.value)"
                      placeholder="Filter" />
@@ -28,7 +28,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Job Title</div>
-            <mat-form-field appearance="outline" class="header-filter">
+            <mat-form-field appearance="outline">
               <input matInput
                      (input)="applyColumnFilter('job_title', $event.target.value)"
                      placeholder="Filter" />
@@ -43,7 +43,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Job Posting</div>
-            <mat-form-field appearance="outline" class="header-filter">
+            <mat-form-field appearance="outline">
               <input matInput
                      (input)="applyColumnFilter('job_posting', $event.target.value)"
                      placeholder="Filter" />
@@ -58,7 +58,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Status</div>
-            <mat-form-field appearance="outline" class="header-filter">
+            <mat-form-field appearance="outline">
               <mat-select
                       placeholder="Filter"
                       (selectionChange)="applyColumnFilter('status', $event.value)">
