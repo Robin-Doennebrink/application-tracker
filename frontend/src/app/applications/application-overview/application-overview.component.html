@@ -11,7 +11,7 @@
 
       <!-- Company -->
       <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef sticky>
+        <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Company</div>
             <input matInput
@@ -23,7 +23,7 @@
       </ng-container>
       <!-- Job Title -->
       <ng-container matColumnDef="job_title">
-        <th mat-header-cell *matHeaderCellDef sticky>
+        <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Job Title</div>
             <input matInput
@@ -36,7 +36,7 @@
 
       <!-- Job Posting -->
       <ng-container matColumnDef="jobPosting">
-        <th mat-header-cell *matHeaderCellDef sticky>
+        <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Job Posting</div>
             <input matInput
@@ -49,7 +49,7 @@
 
       <!-- Status -->
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef sticky>
+        <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Status</div>
             <mat-form-field appearance="outline" class="status-filter">
@@ -81,7 +81,7 @@
 
       <!-- Max Stage -->
       <ng-container matColumnDef="maxStage">
-        <th mat-header-cell *matHeaderCellDef sticky> Max Stage </th>
+        <th mat-header-cell *matHeaderCellDef> Max Stage </th>
         <td mat-cell *matCellDef="let e">
           <span>
             @if (e.max_stage === 'none') {
@@ -97,13 +97,13 @@
 
       <!-- Application Date -->
       <ng-container matColumnDef="applicationDate">
-        <th mat-header-cell *matHeaderCellDef sticky> Application Date </th>
+        <th mat-header-cell *matHeaderCellDef> Application Date </th>
         <td mat-cell *matCellDef="let e"> {{ e.application_date }} </td>
       </ng-container>
 
       <!-- Last Update -->
       <ng-container matColumnDef="lastUpdate">
-        <th mat-header-cell *matHeaderCellDef sticky> Last Update </th>
+        <th mat-header-cell *matHeaderCellDef> Last Update </th>
         <td mat-cell *matCellDef="let e"> {{ e.last_update }} </td>
       </ng-container>
     </table>
