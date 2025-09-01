@@ -18,3 +18,17 @@ class ApplicationEntryDetailAPI(generics.RetrieveUpdateAPIView):
     queryset = ApplicationEntry.objects.all()
     serializer_class = ApplicationEntrySerializer
 
+class ApplicationEntryInterviewListAPI(generics.ListAPIView):
+    """
+    Returns all ApplicationEntry objects currently in an interview stage.
+    """
+    serializer_class = ApplicationEntrySerializer
+
+    def get_queryset(self):
+        return (
+            ApplicationEntry.objects
+            .filter(status__startswith="interview")
+            .order_by("-last_update")
+        )
+
+
