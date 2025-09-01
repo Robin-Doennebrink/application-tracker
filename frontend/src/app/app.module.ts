@@ -9,10 +9,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatTabsModule } from '@angular/material/tabs';
 import {ApplicationStatistics} from "./applications/application-statistics/application-statistics";
+import {OpenReplies} from "./applications/open-replies/open-replies";
 
 const routes: Routes = [
     {path: '', component: ApplicationOverviewComponent},
-  {path: 'statistics', component: ApplicationStatistics}
+    {path: 'statistics', component: ApplicationStatistics},
+    {path: "open-replies", component: OpenReplies}
 ]
 
 @NgModule({ declarations: [AppComponent],
