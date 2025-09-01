@@ -14,9 +14,11 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Company</div>
-            <input matInput
-                   (input)="applyColumnFilter('company', $event.target.value)"
-                   placeholder="Filter" />
+            <mat-form-field appearance="outline" class="header-filter">
+              <input matInput
+                     (input)="applyColumnFilter('company', $event.target.value)"
+                     placeholder="Filter" />
+            </mat-form-field>
           </div>
         </th>
         <td mat-cell *matCellDef="let e"> {{ e.company }} </td>
@@ -26,9 +28,11 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Job Title</div>
-            <input matInput
-                   (input)="applyColumnFilter('job_title', $event.target.value)"
-                   placeholder="Filter" />
+            <mat-form-field appearance="outline" class="header-filter">
+              <input matInput
+                     (input)="applyColumnFilter('job_title', $event.target.value)"
+                     placeholder="Filter" />
+            </mat-form-field>
           </div>
         </th>
         <td mat-cell *matCellDef="let e"> {{ e.job_title }} </td>
@@ -39,9 +43,11 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Job Posting</div>
-            <input matInput
-                   (input)="applyColumnFilter('job_posting', $event.target.value)"
-                   placeholder="Filter" />
+            <mat-form-field appearance="outline" class="header-filter">
+              <input matInput
+                     (input)="applyColumnFilter('job_posting', $event.target.value)"
+                     placeholder="Filter" />
+            </mat-form-field>
           </div>
         </th>
         <td mat-cell *matCellDef="let e"> {{ e.job_posting }} </td>
@@ -52,7 +58,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <div>Status</div>
-            <mat-form-field appearance="outline" class="status-filter">
+            <mat-form-field appearance="outline" class="header-filter">
               <mat-select
                       placeholder="Filter"
                       (selectionChange)="applyColumnFilter('status', $event.value)">
