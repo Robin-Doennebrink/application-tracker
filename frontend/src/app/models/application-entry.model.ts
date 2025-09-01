@@ -10,4 +10,5 @@ export interface ApplicationEntry {
   status: Status;
   max_stage: Stage;
   last_update: string;
+  expected_response_date: string | null;
 }

@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Expected response date</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()" class="dialog-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="expected_response_date" />
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+  </div>
+</form>

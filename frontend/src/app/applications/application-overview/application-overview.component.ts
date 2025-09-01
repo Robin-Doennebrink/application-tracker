@@ -14,6 +14,9 @@ import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { ViewChild, AfterViewInit } from '@angular/core';
+import {
+  SetExpectedResponseDialogComponent
+} from "../set-expected-response-dialog/set-expected-response-dialog.component";
 
 
 @Component({
@@ -132,13 +135,44 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
   }
 
   updateStatus(entry: ApplicationEntry, newStatus: Status) {
-    this.api.patchApplication(entry.id, {"status": newStatus}).subscribe({
-      next: updated => {
-        entry.max_stage = updated.max_stage;
-      },
-      error: err => console.error('Update failed', err)
-    });
+    const isInterview = newStatus.startsWith('interview');
+
+    const patch = (payload: Partial<ApplicationEntry>) => {
+      this.api.patchApplication(entry.id, payload).subscribe({
+        next: updated => {
+          // Status übernehmen
+          entry.status = (updated as any)?.status ?? newStatus;
+          // Optionales expected_response_date übernehmen (aus Backend oder gesendetem Wert)
+          if ('expected_response_date' in payload) {
+            entry.expected_response_date = (updated as any)?.expected_response_date ?? payload.expected_response_date ?? null;
+          }
+          // Bestehendes Verhalten: max_stage aus Backend übernehmen, falls gesetzt
+          if ((updated as any)?.max_stage) {
+            entry.max_stage = (updated as any).max_stage;
+          }
+        },
+        error: err => console.error('Update failed', err)
+      });
+    };
+
+    if (isInterview) {
+      const dialogRef = this.dialog.open(SetExpectedResponseDialogComponent, {
+        width: '360px',
+        data: { currentDate: entry.expected_response_date ?? null }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        const expectedDate = result?.expected_response_date as string | undefined;
+        const payload: Partial<ApplicationEntry> = expectedDate
+            ? { status: newStatus, expected_response_date: expectedDate }
+            : { status: newStatus };
+        patch(payload);
+      });
+    } else {
+      patch({ status: newStatus });
+    }
   }
+
 
   onStageChange(entry: ApplicationEntry, newStage: Stage): void {
     this.api.patchApplication(entry.id, {"max_stage": newStage}).subscribe({
