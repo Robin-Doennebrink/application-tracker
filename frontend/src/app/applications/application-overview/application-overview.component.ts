@@ -71,14 +71,10 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
           const fieldMap: Record<string, keyof ApplicationEntry> = {
             company: 'company',
             job_title: 'job_title',
-            jobPosting: 'job_posting',
             job_posting: 'job_posting',
             status: 'status',
-            maxStage: 'max_stage',
             max_stage: 'max_stage',
-            applicationDate: 'application_date',
             application_date: 'application_date',
-            lastUpdate: 'last_update',
             last_update: 'last_update',
           };
 
