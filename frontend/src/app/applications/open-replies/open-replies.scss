@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.table-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: block;
+  max-height: 100%;
+}
+
+th, td {
+  text-align: center;
+}
+
+
