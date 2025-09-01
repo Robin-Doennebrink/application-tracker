@@ -7,13 +7,14 @@ import { RouterModule } from '@angular/router';
 import {ApplicationOverviewComponent} from "./applications/application-overview/application-overview.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatTabsModule } from '@angular/material/tabs';
 
 const routes: Routes = [
     {path: '', component: ApplicationOverviewComponent}
 ]
 
 @NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule, RouterOutlet, RouterModule.forRoot(routes), BrowserAnimationsModule], providers: [
+    bootstrap: [AppComponent], imports: [BrowserModule, RouterOutlet, RouterModule.forRoot(routes), BrowserAnimationsModule, MatTabsModule], providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())
     ] })
