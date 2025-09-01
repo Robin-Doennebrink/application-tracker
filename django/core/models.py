@@ -46,7 +46,8 @@ class ApplicationEntry(models.Model):
         default=Stage.NONE,
     )
     expected_response_date = models.DateField(blank=True, null=True)  # Date you expect to hear back (for interview)
+    comment = models.TextField(blank=True, null=True)
     last_update = models.DateField(auto_now=True)        # Last update
 
     def __str__(self):
-        return f"{self.company} - {self.job_title} ({self.get_status_display()})"
+        return f"{self.company} - {self.job_title}"
