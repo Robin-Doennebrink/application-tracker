@@ -1,0 +1,168 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    app: mysql
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_DATABASE
+              value: mydb
+            - name: MYSQL_USER
+              value: myuser
+            - name: MYSQL_PASSWORD
+              value: mypassword
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpassword
+            - name: MYSQL_TCP_PORT
+              value: "3306"
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+          readinessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - "-h"
+                - "127.0.0.1"
+                - "-prootpassword"
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 20
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: django
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: python:3.10-slim  # Using base image since we mount code
+          workingDir: /code
+          command: ["sh", "-c", "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+          env:
+            - name: DB_NAME
+              value: mydb
+            - name: DB_USER
+              value: myuser
+            - name: DB_PASSWORD
+              value: mypassword
+            - name: DB_HOST
+              value: mysql
+            - name: DB_PORT
+              value: "3306"
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: django-code
+              mountPath: /code
+      volumes:
+        - name: django-code
+          hostPath:
+            path: "/mnt/d/Dokumente/Eigene Dateien/Projekte/application_tracker/django/"
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-frontend
+spec:
+  ports:
+    - port: 4200
+      targetPort: 4200
+  selector:
+    app: angular-frontend
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-frontend
+  template:
+    metadata:
+      labels:
+        app: angular-frontend
+    spec:
+      containers:
+        - name: angular-frontend
+          image: node:18
+          workingDir: /app
+          command: ["sh", "-c", "npm install && npm start"]
+          ports:
+            - containerPort: 4200
+          volumeMounts:
+            - name: frontend-code
+              mountPath: /app
+      volumes:
+        - name: frontend-code
+          hostPath:
+            path: "/mnt/d/Dokumente/Eigene Dateien/Projekte/application_tracker/frontend"
+            type: DirectoryOrCreate
