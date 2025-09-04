@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApplicationEntry} from "../../models/application-entry.model";
 import {MatTableModule} from "@angular/material/table";
 import {CommonModule} from "@angular/common";
 import {ApplicationsService} from "../../services/application.service";
+import {LocaleService} from "../../services/locale.service";
 
 @Component({
   selector: 'app-open-replies',
@@ -10,13 +11,14 @@ import {ApplicationsService} from "../../services/application.service";
   templateUrl: './open-replies.html',
   styleUrl: './open-replies.scss'
 })
-export class OpenReplies {
+export class OpenReplies implements OnInit{
   displayedColumns = ['company', 'job_title', 'expected_response_date'];
   data: ApplicationEntry[] = [];
   loading = true;
   error: string | null = null;
 
-  constructor(private api: ApplicationsService) {}
+  constructor(private api: ApplicationsService, public localeService: LocaleService
+  ) {}
 
   ngOnInit(): void {
     this.api.listInterviews().subscribe({
