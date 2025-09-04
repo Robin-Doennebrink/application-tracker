@@ -100,9 +100,9 @@ spec:
     spec:
       containers:
         - name: django
-          image: python:3.10-slim  # Using base image since we mount code
+          image: python:3.13-slim
           workingDir: /code
-          command: ["sh", "-c", "pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+          command: ["sh", "-c", "apt-get update && apt-get install -y gcc default-libmysqlclient-dev pkg-config && pip install -r requirements.txt && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
           env:
             - name: DB_NAME
               value: mydb
@@ -122,7 +122,7 @@ spec:
       volumes:
         - name: django-code
           hostPath:
-            path: "/mnt/d/Dokumente/Eigene Dateien/Projekte/application_tracker/django/"
+            path: "/django"
             type: DirectoryOrCreate
 ---
 apiVersion: v1
@@ -164,5 +164,6 @@ spec:
       volumes:
         - name: frontend-code
           hostPath:
-            path: "/mnt/d/Dokumente/Eigene Dateien/Projekte/application_tracker/frontend"
+            path: "/frontend"
             type: DirectoryOrCreate
+
