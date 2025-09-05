@@ -9,6 +9,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatTabsModule } from '@angular/material/tabs';
 import {OpenReplies} from "./applications/open-replies/open-replies";
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+(PlotlyModule as any).plotlyjs = PlotlyJS;
+
 
 const routes: Routes = [
     {path: '', component: ApplicationOverviewComponent},
@@ -23,7 +28,9 @@ const routes: Routes = [
 ]
 
 @NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule, RouterOutlet, RouterModule.forRoot(routes), BrowserAnimationsModule, MatTabsModule], providers: [
+    bootstrap: [AppComponent],
+    imports: [BrowserModule, RouterOutlet, RouterModule.forRoot(routes), BrowserAnimationsModule, MatTabsModule, PlotlyModule.forRoot(PlotlyJS)],
+    providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())
     ] })

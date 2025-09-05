@@ -27,8 +27,8 @@ export class ApplicationsService {
     return this.http.get<ApplicationEntry[]>(`${this.base}/api/application/interviews/`);
   }
 
-  aggregateInterviews(): Observable<AggregatedApplicationData[]> {
-    return this.http.get<AggregatedApplicationData[]>(`${this.base}/api/application/aggregates/`);
+  aggregateInterviews(): Observable<AggregatedApplicationData> {
+    return this.http.get<AggregatedApplicationData>(`${this.base}/api/application/aggregates/`);
   }
 
 }
