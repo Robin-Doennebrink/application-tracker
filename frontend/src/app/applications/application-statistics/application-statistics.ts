@@ -33,8 +33,12 @@ export class ApplicationStatisticsComponent implements OnInit {
 
       this.layout = {
         title: 'Applications by Status',
-        xaxis: { title: 'Status' },
-        yaxis: { title: 'Count' },
+        yaxis: {
+          title: 'Count', tickmode: 'linear',
+          dtick: 1,
+          tickformat: ',d'
+        },
+        xaxis: { title: 'Count' },
       };
     });
   }
