@@ -8,10 +8,10 @@ With the following command the images will be rebuild and application will start
 Start minikube: ``minikube start``
 Use docker env: ``eval $(minikube docker-env)  # On PowerShell use: minikube docker-env --shell powershell | Invoke-Expression``
 
-Mount directories:
+Mount directory:
 - minikube mount 'D:\Dokumente\Eigene Dateien\Projekte\application_tracker\django:/django'
 
 Start application: ``kubectl apply -f k8s-dev-app.yaml``
-Expose frontend port: ``minikube service angular-frontend --url``
+Expose django port: ``kubectl port-forward service/django 8000:8000 ``
 Optional: Expose database port: ``kubectl port-forward service/mysql 3306:3306 ``
 
