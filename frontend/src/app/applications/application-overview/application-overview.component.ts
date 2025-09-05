@@ -4,6 +4,8 @@ import {ApplicationsService} from "../../services/application.service";
 import {CommonModule} from "@angular/common";
 import {AddApplicationDialogComponent} from "../add-application-dialog/add-application-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {Status, StatusLabels, StatusValues} from "../../models/status.enum";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
@@ -17,6 +19,7 @@ import { ViewChild, AfterViewInit } from '@angular/core';
 import {
   SetExpectedResponseDialogComponent
 } from "../set-expected-response-dialog/set-expected-response-dialog.component";
+import {LocaleService} from "../../services/locale.service";
 
 
 @Component({
@@ -29,7 +32,9 @@ import {
     MatButtonModule,
     MatTableModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule,
+    MatIconModule
   ],
   templateUrl: './application-overview.component.html',
   styleUrls: ['./application-overview.component.scss']
@@ -61,7 +66,7 @@ export class ApplicationOverviewComponent implements OnInit, AfterViewInit {
   filterValues: { [key: string]: string } = {};
 
 
-  constructor(private api: ApplicationsService, private dialog: MatDialog) {}
+  constructor(private api: ApplicationsService, private dialog: MatDialog, public localeService: LocaleService) {}
 
   ngOnInit(): void {
     this.api.list().subscribe({
