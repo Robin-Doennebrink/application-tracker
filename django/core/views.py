@@ -28,7 +28,7 @@ class ApplicationEntryInterviewListAPI(generics.ListAPIView):
         return (
             ApplicationEntry.objects
             .filter(status__startswith="interview")
-            .order_by("-last_update")
+            .order_by("expected_response_date")
         )
 
 
