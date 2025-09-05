@@ -1,17 +1,23 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
+  display: block;
   width: 100%;
   min-width: 0;
 }
 
-.table-container {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  display: block;
-  max-height: 100%;
+.table-container,
+.table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-y: visible;
 }
+
+table[mat-table],
+.mat-mdc-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+
 
 .mat-header-row {
   position: sticky;
