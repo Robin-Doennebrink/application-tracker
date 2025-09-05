@@ -9,12 +9,28 @@
   width: 100%;
   max-width: 100%;
   overflow-y: visible;
+  overflow-x: auto;
 }
 
 table[mat-table],
 .mat-mdc-table {
   width: 100%;
-  table-layout: fixed;
+}
+
+/* Desktop: Use fixed table layout */
+@media (min-width: 1825px) {
+  table[mat-table],
+  .mat-mdc-table {
+    table-layout: fixed;
+  }
+}
+
+/* Smaller than desktop: Use auto table layout */
+@media (max-width: 1825px) {
+  table[mat-table],
+  .mat-mdc-table {
+    table-layout: auto;
+  }
 }
 
 
