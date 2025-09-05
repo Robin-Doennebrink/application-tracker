@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {ApplicationEntry} from "../models/application-entry.model";
-import {Status} from "../models/status.enum";
+import {AggregatedApplicationData, ApplicationEntry} from "../models/application-entry.model";
 
 @Injectable({ providedIn: 'root' })
 export class ApplicationsService {
@@ -26,6 +25,10 @@ export class ApplicationsService {
 
   listInterviews(): Observable<ApplicationEntry[]> {
     return this.http.get<ApplicationEntry[]>(`${this.base}/api/application/interviews/`);
+  }
+
+  aggregateInterviews(): Observable<AggregatedApplicationData[]> {
+    return this.http.get<AggregatedApplicationData[]>(`${this.base}/api/application/aggregates/`);
   }
 
 }

@@ -12,3 +12,19 @@ export interface ApplicationEntry {
   last_update: string;
   expected_response_date: string | null;
 }
+
+export interface StatusCount {
+  status: Status;
+  count: number;
+}
+
+export interface StageCount {
+  max_stage: Stage;
+  count: number;
+}
+
+export interface AggregatedApplicationData {
+  status_counts: StatusCount[];
+  max_stage_counts: StageCount[];
+  total: number;
+}
