@@ -34,5 +34,15 @@ export class OpenReplies implements OnInit{
     });
   }
 
+  isPast(dateVal: unknown): boolean {
+    if (!dateVal) return false;
+    const d = typeof dateVal === 'string' || typeof dateVal === 'number' ? new Date(dateVal) : (dateVal as Date);
+    if (isNaN(d.getTime())) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const cmp = new Date(d);
+    cmp.setHours(0, 0, 0, 0);
+    return cmp.getTime() < today.getTime();
+  }
 
 }

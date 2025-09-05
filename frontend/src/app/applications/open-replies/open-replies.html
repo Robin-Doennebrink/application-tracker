@@ -17,7 +17,9 @@
                 Company
               </div>
             </th>
-            <td mat-cell *matCellDef="let e">{{ e.company }}</td>
+            <td mat-cell *matCellDef="let e" [class.past]="isPast(e.expected_response_date)">
+              {{ e.company }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="job_title">
@@ -26,7 +28,9 @@
                 Job Title
               </div>
             </th>
-            <td mat-cell *matCellDef="let e">{{ e.job_title }}</td>
+            <td mat-cell *matCellDef="let e" [class.past]="isPast(e.expected_response_date)">
+              {{ e.job_title }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="expected_response_date">
@@ -35,7 +39,7 @@
                 Expected Response
               </div>
             </th>
-            <td mat-cell *matCellDef="let e">
+            <td mat-cell *matCellDef="let e" [class.past]="isPast(e.expected_response_date)">
               {{ e.expected_response_date| date:'shortDate':'':(localeService.locale$ | async) ?? 'en' }}
             </td>
           </ng-container>
