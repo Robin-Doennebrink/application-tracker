@@ -61,7 +61,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div>
             <div>Status</div>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
               <mat-select
                       placeholder="Filter"
                       (selectionChange)="applyColumnFilter('status', $event.value)">
