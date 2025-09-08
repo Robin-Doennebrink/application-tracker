@@ -1,10 +1,13 @@
 # Application tracker application
 
 ## Set-up and start
+You can use Docker-Compose or Kubernetes to start the application.
+### Docker-Compose
 With the following command the images will be rebuild and application will start running in the background.
 
 ``docker-compose up --build -d``
 
+### Kubernetes
 Start minikube: ``minikube start``
 Use docker env: ``eval $(minikube docker-env)  # On PowerShell use: minikube docker-env --shell powershell | Invoke-Expression``
 
