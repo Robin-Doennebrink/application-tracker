@@ -1,6 +1,13 @@
-<plotly-plot
-        [data]="plotData"
-        [layout]="layout"
-        [config]="config"
-        [ngStyle]="{ width: '100%', height: '100%' }">
-</plotly-plot>
+<div class="plot-container">
+  <plotly-plot
+          [data]="statusData"
+          [layout]="layout1"
+          [config]="config">
+  </plotly-plot>
+
+  <plotly-plot
+          [data]="maxStageData"
+          [layout]="layout2"
+          [config]="config">
+  </plotly-plot>
+</div>
