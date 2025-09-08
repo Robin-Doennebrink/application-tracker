@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {AggregatedApplicationData, ApplicationEntry} from "../models/application-entry.model";
+import { ApplicationEntry, AggregatedApplicationData } from '../models/application-entry.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ApplicationsService {
-  private base = 'http://localhost:8000'; // or env
-  constructor(private http: HttpClient) {}
+  private base = environment.apiBaseUrl;
+
+  constructor(private http: HttpClient) {
+    console.log("!!!!!!!!!!");
+    console.log(this.base);
+  }
 
   list(): Observable<ApplicationEntry[]> {
-    return this.http.get<ApplicationEntry[]>(`${this.base}/api/applications/`);
+    return this.http.get<ApplicationEntry[]>(`${this.base}/applications/`);
   }
 
   addApplication(applicationData: any): Observable<ApplicationEntry> {
-      return this.http.post<ApplicationEntry>(`${this.base}/api/applications/`, applicationData)
+    return this.http.post<ApplicationEntry>(`${this.base}/applications/`, applicationData);
   }
 
   patchApplication(
       id: number,
       changes: Partial<ApplicationEntry>
   ): Observable<ApplicationEntry> {
-    return this.http.patch<ApplicationEntry>(`${this.base}/api/applications/${id}/`, changes);
+    return this.http.patch<ApplicationEntry>(`${this.base}/applications/${id}/`, changes);
   }
 
   listInterviews(): Observable<ApplicationEntry[]> {
-    return this.http.get<ApplicationEntry[]>(`${this.base}/api/application/interviews/`);
+    return this.http.get<ApplicationEntry[]>(`${this.base}/application/interviews/`);
   }
 
   aggregateInterviews(): Observable<AggregatedApplicationData> {
-    return this.http.get<AggregatedApplicationData>(`${this.base}/api/application/aggregates/`);
+    return this.http.get<AggregatedApplicationData>(`${this.base}/application/aggregates/`);
   }
-
 }
