@@ -8,10 +8,7 @@ import { environment } from '../../environments/environment';
 export class ApplicationsService {
   private base = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {
-    console.log("!!!!!!!!!!");
-    console.log(this.base);
-  }
+  constructor(private http: HttpClient) {  }
 
   list(): Observable<ApplicationEntry[]> {
     return this.http.get<ApplicationEntry[]>(`${this.base}/applications/`);
