@@ -13,7 +13,7 @@ Start minikube: ``minikube start``
 Use docker env: ``eval $(minikube docker-env)  # On PowerShell use: minikube docker-env --shell powershell | Invoke-Expression``
 
 Mount directory:
-- minikube mount 'D:\Dokumente\Eigene Dateien\Projekte\application_tracker\django:/django'
+- minikube mount ``D:\Dokumente\Eigene Dateien\Projekte\application_tracker\django:/django``
 
 Start application: ``kubectl apply -f k8s-dev-app.yaml``
 
